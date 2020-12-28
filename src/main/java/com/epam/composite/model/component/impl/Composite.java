@@ -1,18 +1,18 @@
 package com.epam.composite.model.component.impl;
 
 import com.epam.composite.model.component.Component;
-import com.epam.composite.model.component.Level;
+import com.epam.composite.model.component.Layer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Composite implements Component {
-    private final Level level;
+    private final Layer layer;
     private final List<Component> components;
 
-    public Composite(Level level) {
+    public Composite(Layer layer) {
         this.components = new ArrayList<>();
-        this.level = level;
+        this.layer = layer;
     }
 
     @Override
@@ -36,8 +36,8 @@ public class Composite implements Component {
     }
 
     @Override
-    public Level getCurrentLevel() {
-        return this.level;
+    public Layer getCurrentLayer() {
+        return this.layer;
     }
 
     @Override

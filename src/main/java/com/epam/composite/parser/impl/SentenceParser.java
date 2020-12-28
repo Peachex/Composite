@@ -1,7 +1,7 @@
 package com.epam.composite.parser.impl;
 
 import com.epam.composite.model.component.Component;
-import com.epam.composite.model.component.Level;
+import com.epam.composite.model.component.Layer;
 import com.epam.composite.model.component.impl.Composite;
 import com.epam.composite.parser.Parser;
 
@@ -13,7 +13,7 @@ public class SentenceParser implements Parser {
 
     @Override
     public Component parse(String text) {
-        Component result = new Composite(Level.PARAGRAPH);
+        Component result = new Composite(Layer.PARAGRAPH);
         List<String> sentences = parseText(text);
         for (String sentence : sentences) {
             Component word = nextParser.parse(sentence);

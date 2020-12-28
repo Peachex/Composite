@@ -5,6 +5,6 @@ public interface Component {
     void remove(Component component);
     Component getChild(int index);
     int size();
-    Level getCurrentLevel();
+    Layer getCurrentLayer();
     String toString();
 }
