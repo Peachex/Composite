@@ -1,7 +1,5 @@
-package com.epam.composite.model.component.impl;
+package com.epam.composite.component;
 
-import com.epam.composite.model.component.Component;
-import com.epam.composite.model.component.Layer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,8 +9,8 @@ public class CharacterLeaf implements Component {
     private final Layer layer;
     private char character;
 
-    public CharacterLeaf(char character) {
-        this.layer = Layer.CHARACTER;
+    public CharacterLeaf(char character, Layer layer) {
+        this.layer = layer;
         this.character = character;
     }
 
@@ -26,25 +24,31 @@ public class CharacterLeaf implements Component {
 
     @Override
     public void add(Component component) {
-        logger.log(Level.FATAL, "Not implemented for this component.");
+        logger.log(Level.ERROR, "Not implemented for this component.");
         throw new UnsupportedOperationException("Not implemented");
     }
 
     @Override
     public Component getChild(int index) {
-        logger.log(Level.FATAL, "Not implemented for this component.");
+        logger.log(Level.ERROR, "Not implemented for this component.");
         throw new UnsupportedOperationException("Not implemented");
     }
 
     @Override
     public void remove(Component component) {
-        logger.log(Level.FATAL, "Not implemented for this component.");
+        logger.log(Level.ERROR, "Not implemented for this component.");
         throw new UnsupportedOperationException("Not implemented");
     }
 
     @Override
     public int size() {
         return 1;
+    }
+
+    @Override
+    public boolean isWord() {
+        logger.log(Level.ERROR, "Not implemented for this component.");
+        throw new UnsupportedOperationException("Not implemented");
     }
 
     @Override

@@ -1,7 +1,6 @@
-package com.epam.composite.parser.impl;
+package com.epam.composite.parser;
 
-import com.epam.composite.model.component.Component;
-import com.epam.composite.parser.Parser;
+import com.epam.composite.component.Component;
 
 public class TextParser implements Parser {
     private Parser nextParser = new ParagraphParser();

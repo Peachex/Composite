@@ -1,0 +1,1 @@
+02-01-2021 12:25:13 isWord ERROR component.CharacterLeaf, message: Not implemented for this component.
