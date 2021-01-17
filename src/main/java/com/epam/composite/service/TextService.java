@@ -1,15 +1,15 @@
 package com.epam.composite.service;
 
-import com.epam.composite.component.Component;
+import com.epam.composite.component.TextComponent;
 
 import java.util.Map;
 
 public interface TextService {
-    Component sortParagraphsBySentencesAmount(Component text, boolean ascending);
+    TextComponent sortParagraphsBySentencesAmount(TextComponent text, boolean ascending);
 
-    Component findSentencesWithMaxLengthWord(Component text);
+    TextComponent findSentencesWithMaxLengthWord(TextComponent text);
 
-    Component deleteSentencesWithWordsAmountLessThanCurrent(Component text, int wordsAmount);
+    TextComponent deleteSentencesWithWordsAmountLessThanCurrent(TextComponent text, int wordsAmount);
 
-    Map<String, Integer> findSameWords(Component text);
+    Map<String, Integer> findSameWords(TextComponent text);
 }

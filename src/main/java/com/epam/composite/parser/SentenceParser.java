@@ -1,6 +1,6 @@
 package com.epam.composite.parser;
 
-import com.epam.composite.component.Component;
+import com.epam.composite.component.TextComponent;
 import com.epam.composite.component.Layer;
 import com.epam.composite.component.TextComposite;
 
@@ -13,11 +13,11 @@ public class SentenceParser implements Parser {
     private Parser nextParser = new WordParser();
 
     @Override
-    public Component parse(String text) {
-        Component result = new TextComposite(Layer.PARAGRAPH);
+    public TextComponent parse(String text) {
+        TextComponent result = new TextComposite(Layer.PARAGRAPH);
         List<String> sentences = parseText(text);
         for (String sentence : sentences) {
-            Component word = nextParser.parse(sentence);
+            TextComponent word = nextParser.parse(sentence);
             result.add(word);
         }
         return result;

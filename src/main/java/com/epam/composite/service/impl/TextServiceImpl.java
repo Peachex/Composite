@@ -1,7 +1,7 @@
 package com.epam.composite.service.impl;
 
 import com.epam.composite.comparator.ParagraphComparator;
-import com.epam.composite.component.Component;
+import com.epam.composite.component.TextComponent;
 import com.epam.composite.component.Layer;
 import com.epam.composite.component.TextComposite;
 import com.epam.composite.service.TextService;
@@ -12,26 +12,26 @@ import java.util.List;
 import java.util.Map;
 
 public class TextServiceImpl implements TextService {
-    public Component sortParagraphsBySentencesAmount(Component text, boolean ascending) {
-        List<Component> sortedParagraphs = new ArrayList<>();
+    public TextComponent sortParagraphsBySentencesAmount(TextComponent text, boolean ascending) {
+        List<TextComponent> sortedParagraphs = new ArrayList<>();
         for (int i = 0; i < text.size(); i++) {
             sortedParagraphs.add(text.getChild(i));
         }
         sortedParagraphs.sort(ascending ? ParagraphComparator.SENTENCES_AMOUNT : ParagraphComparator.SENTENCES_AMOUNT.reversed());
-        Component sortedText = new TextComposite(Layer.TEXT);
-        for (Component paragraph : sortedParagraphs) {
+        TextComponent sortedText = new TextComposite(Layer.TEXT);
+        for (TextComponent paragraph : sortedParagraphs) {
             sortedText.add(paragraph);
         }
         return sortedText;
     }
 
-    public Component findSentencesWithMaxLengthWord(Component text) {
-        Component sentences = new TextComposite(Layer.SENTENCE);
+    public TextComponent findSentencesWithMaxLengthWord(TextComponent text) {
+        TextComponent sentences = new TextComposite(Layer.SENTENCE);
         int maxLength = 0;
         for (int i = 0; i < text.size(); i++) {
             for (int j = 0; j < text.getChild(i).size(); j++) {
                 for (int k = 0; k < text.getChild(i).getChild(j).size(); k++) {
-                    Component word = text.getChild(i).getChild(j).getChild(k);
+                    TextComponent word = text.getChild(i).getChild(j).getChild(k);
                     if (word.size() > maxLength) {
                         maxLength = word.size();
                     }
@@ -42,7 +42,7 @@ public class TextServiceImpl implements TextService {
             for (int j = 0; j < text.getChild(i).size(); j++) {
                 int k = 0;
                 while (k < text.getChild(i).getChild(j).size()) {
-                    Component word = text.getChild(i).getChild(j).getChild(k++);
+                    TextComponent word = text.getChild(i).getChild(j).getChild(k++);
                     if (word.size() == maxLength) {
                         sentences.add(text.getChild(i).getChild(j));
                         break;
@@ -53,12 +53,12 @@ public class TextServiceImpl implements TextService {
         return sentences;
     }
 
-    public Component deleteSentencesWithWordsAmountLessThanCurrent(Component text, int wordsAmount) {
-        Component result = new TextComposite(Layer.TEXT);
+    public TextComponent deleteSentencesWithWordsAmountLessThanCurrent(TextComponent text, int wordsAmount) {
+        TextComponent result = new TextComposite(Layer.TEXT);
         for (int i = 0; i < text.size(); i++) {
-            Component paragraph = new TextComposite(Layer.PARAGRAPH);
+            TextComponent paragraph = new TextComposite(Layer.PARAGRAPH);
             for (int j = 0; j < text.getChild(i).size(); j++) {
-                Component sentence = text.getChild(i).getChild(j);
+                TextComponent sentence = text.getChild(i).getChild(j);
                 if (findWordsAmount(sentence) >= wordsAmount) {
                     paragraph.add(sentence);
                 }
@@ -70,12 +70,12 @@ public class TextServiceImpl implements TextService {
         return result;
     }
 
-    public Map<String, Integer> findSameWords(Component text) {
+    public Map<String, Integer> findSameWords(TextComponent text) {
         List<String> words = new ArrayList<>();
         for (int i = 0; i < text.size(); i++) {
             for (int j = 0; j < text.getChild(i).size(); j++) {
                 for (int k = 0; k < text.getChild(i).getChild(j).size(); k++) {
-                    Component word = text.getChild(i).getChild(j).getChild(k);
+                    TextComponent word = text.getChild(i).getChild(j).getChild(k);
                     if (word.getCurrentLayer() == Layer.WORD) {
                         words.add(word.toString().toUpperCase());
                     }
@@ -95,10 +95,10 @@ public class TextServiceImpl implements TextService {
         return result;
     }
 
-    private int findWordsAmount(Component sentence) {
+    private int findWordsAmount(TextComponent sentence) {
         int result = 0;
         for (int i = 0; i < sentence.size(); i++) {
-            Component word = sentence.getChild(i);
+            TextComponent word = sentence.getChild(i);
             if ((word.getCurrentLayer() == Layer.WORD && word.isWord())) {
                 result++;
             }

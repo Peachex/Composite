@@ -1,7 +1,7 @@
 package com.epam.composite.parser;
 
-import com.epam.composite.component.Component;
+import com.epam.composite.component.TextComponent;
 
 public interface Parser {
-    Component parse(String text);
+    TextComponent parse(String text);
 }

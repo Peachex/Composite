@@ -16,6 +16,8 @@ import java.util.stream.Stream;
 public class TextReader {
     private static final Logger logger = LogManager.getLogger();
     private static final String DEFAULT_PATH = "data\\text1.txt";
+    private static final String NEW_LINE_SYMBOL = "\n";
+    private static final String TAB_SYMBOL = "\t";
 
     public String readText(String path) throws ReaderException {
         if (path == null) {
@@ -39,8 +41,11 @@ public class TextReader {
             throw new ReaderException(e.getMessage());
         }
         StringBuilder text = new StringBuilder();
-        for (String line : lines) {
-            text.append(line);
+        for (int i = 0; i < lines.size(); i++) {
+            text.append(TAB_SYMBOL).append(lines.get(i));
+            if (i < lines.size() - 1) {
+                text.append(NEW_LINE_SYMBOL);
+            }
         }
         return text.toString();
     }

@@ -4,7 +4,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class CharacterLeaf implements Component {
+public class CharacterLeaf implements TextComponent {
     private final static Logger logger = LogManager.getLogger();
     private final Layer layer;
     private char character;
@@ -23,19 +23,19 @@ public class CharacterLeaf implements Component {
     }
 
     @Override
-    public void add(Component component) {
+    public void add(TextComponent component) {
         logger.log(Level.ERROR, "Not implemented for this component.");
         throw new UnsupportedOperationException("Not implemented");
     }
 
     @Override
-    public Component getChild(int index) {
+    public TextComponent getChild(int index) {
         logger.log(Level.ERROR, "Not implemented for this component.");
         throw new UnsupportedOperationException("Not implemented");
     }
 
     @Override
-    public void remove(Component component) {
+    public void remove(TextComponent component) {
         logger.log(Level.ERROR, "Not implemented for this component.");
         throw new UnsupportedOperationException("Not implemented");
     }

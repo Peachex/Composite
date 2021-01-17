@@ -1,7 +1,7 @@
 package com.epam.composite.parser;
 
 import com.epam.composite.component.CharacterLeaf;
-import com.epam.composite.component.Component;
+import com.epam.composite.component.TextComponent;
 import com.epam.composite.component.Layer;
 import com.epam.composite.component.TextComposite;
 
@@ -16,11 +16,11 @@ public class WordParser implements Parser {
     private Parser nextParser = new CharacterParser();
 
     @Override
-    public Component parse(String text) {
-        Component result = new TextComposite(Layer.SENTENCE);
+    public TextComponent parse(String text) {
+        TextComponent result = new TextComposite(Layer.SENTENCE);
         List<String> words = parseText(text);
         for (String word : words) {
-            Component character;
+            TextComponent character;
             if (!word.matches(PUNCTUATION_REGEX)) {
                 character = nextParser.parse(word);
             } else {

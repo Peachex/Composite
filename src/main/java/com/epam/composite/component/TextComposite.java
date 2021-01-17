@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TextComposite implements Component {
+public class TextComposite implements TextComponent {
     private static final String SPACE_SYMBOL = " ";
     private static final String NEW_LINE_SYMBOL = "\n";
     private static final String TAB_SYMBOL = "\t";
     private static final String WORD_REGEX = "[\\p{L}\\p{N}]+([\\p{P}\\p{S}]+[\\p{L}\\p{N})]+)*";
     private final Layer layer;
-    private final List<Component> components;
+    private final List<TextComponent> components;
 
     public TextComposite(Layer layer) {
         this.components = new ArrayList<>();
@@ -19,17 +19,17 @@ public class TextComposite implements Component {
     }
 
     @Override
-    public void add(Component component) {
+    public void add(TextComponent component) {
         components.add(component);
     }
 
     @Override
-    public void remove(Component component) {
+    public void remove(TextComponent component) {
         components.remove(component);
     }
 
     @Override
-    public Component getChild(int index) {
+    public TextComponent getChild(int index) {
         return components.get(index);
     }
 
@@ -55,14 +55,14 @@ public class TextComposite implements Component {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < components.size(); i++) {
-            Component currentComponent = components.get(i);
+            TextComponent currentComponent = components.get(i);
             if (currentComponent.getCurrentLayer() == Layer.CHARACTER) {
                 sb.append(currentComponent);
             } else {
                 if (currentComponent.getCurrentLayer() == Layer.PUNCTUATION) {
                     if (currentComponent.toString().matches("[”),:;-]")) {
                         if (i < components.size() - 1) {
-                            Component nextComponent = components.get(i + 1);
+                            TextComponent nextComponent = components.get(i + 1);
                             sb.append((nextComponent.getCurrentLayer() == Layer.PUNCTUATION && nextComponent.toString().matches("[,:;]")) ?
                                     currentComponent : currentComponent + SPACE_SYMBOL);
                         } else {
@@ -74,7 +74,7 @@ public class TextComposite implements Component {
                 } else {
                     if (currentComponent.getCurrentLayer() == Layer.WORD || currentComponent.getCurrentLayer() == Layer.SENTENCE) {
                         if (i < components.size() - 1) {
-                            Component nextComponent = components.get(i + 1);
+                            TextComponent nextComponent = components.get(i + 1);
                             sb.append((nextComponent.getCurrentLayer() == Layer.PUNCTUATION && !nextComponent.toString().matches("[“(-]")) ?
                                     currentComponent : currentComponent + SPACE_SYMBOL);
                         } else {
